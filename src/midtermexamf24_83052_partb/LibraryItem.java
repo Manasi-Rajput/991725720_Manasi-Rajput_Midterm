@@ -45,8 +45,9 @@ public class LibraryItem {
     }
     
     public static void selectBook(Scanner sc) {
-        System.out.print("\nEnter the number of the book you want to borrow: ");
-        int choice = sc.nextInt() - 1; // Adjusting for 0-based indexing
+    System.out.print("\nEnter the number of the book you want to borrow: ");
+    if (sc.hasNextInt()) {
+        int choice = sc.nextInt() - 1; 
 
         if (choice < 0 || choice >= books.length) {
             System.out.println("Invalid selection. Please try again.");
@@ -55,11 +56,16 @@ public class LibraryItem {
 
         if (bookAvailability[choice]) {
             System.out.println("You selected: " + books[choice] + ". Enjoy your reading!");
-            bookAvailability[choice] = false; // Mark the book as borrowed
+            bookAvailability[choice] = false; 
         } else {
             System.out.println("Sorry, " + books[choice] + " is currently unavailable. Please select another book.");
         }
+    } else {
+        System.out.println("Invalid input. Please enter a number.");
+        sc.next(); 
     }
+}
+
     
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
